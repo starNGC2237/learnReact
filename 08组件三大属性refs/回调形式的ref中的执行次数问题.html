@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="test"></div>
+        <script
+            type="text/javascript"
+            src="../js/react.development.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="../js/react-dom.development.js"
+        ></script>
+        <script type="text/javascript" src="../js/babel.min.js"></script>
+        <script type="text/babel">
+            class Demo extends React.Component {
+                state = { isHot: true };
+                showInfo = () => {};
+                getRef = (currentNode) => {
+                    this.input1 = currentNode;
+                    console.log("@", currentNode);
+                };
+
+                render() {
+                    const { isHot } = this.state;
+                    return (
+                        <div>
+                            <h2>今天{isHot ? "炎热" : "凉快"}</h2>
+                            {/*{当已内联函数定义时，在更新时会触发两次，第一次为null，第二次为值*/}
+                            <input
+                                ref={this.getRef}
+                                type="text"
+                                placeholder="点击按钮提示数据"
+                            />
+                            &nbsp;
+                            <button onClick={this.showInfo}>
+                                点击我提示左侧的数据
+                            </button>
+                            &nbsp;
+                            <button
+                                onClick={() => {
+                                    this.setState({ isHot: !this.state.isHot });
+                                }}
+                            >
+                                切换天气
+                            </button>
+                        </div>
+                    );
+                }
+            }
+            ReactDOM.render(<Demo />, document.getElementById("test"));
+        </script>
+    </body>
+</html>
