@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="test"></div>
+        <script
+            type="text/javascript"
+            src="../js/react.development.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="../js/react-dom.development.js"
+        ></script>
+        <script type="text/javascript" src="../js/babel.min.js"></script>
+        <script type="text/babel">
+            class Login extends React.Component {
+                // 页面所有的输入都接到并存到state里
+                state = {
+                    username: "",
+                    password: "",
+                };
+                onChangeUserName = (e) => {
+                    console.log(e.value);
+                    this.setState({ username: e.target.value });
+                };
+                onChangePassWord = (e)=>{
+                    this.setState({password:e.target.value});
+                }
+                handSubmit = (e) => {
+                    e.preventDefault();
+                };
+                render() {
+                    return (
+                        <form onSubmit={this.handSubmit}>
+                            用户名：
+                            <input
+                                ref={(c) => (this.username = c)}
+                                type="text"
+                                onChange={this.onChangeUserName}
+                                name="username"
+                            />
+                            密码：
+                            <input
+                                ref={(c) => (this.password = c)}
+                                type="password"
+                                name="password"
+                                onChange={this.onChangePassWord}
+                            />
+                            <button>登录</button>
+                        </form>
+                    );
+                }
+            }
+            ReactDOM.render(<Login />, document.getElementById("test"));
+        </script>
+    </body>
+</html>

@@ -19,12 +19,12 @@
         <script type="text/javascript" src="../js/babel.min.js"></script>
         <script type="text/babel">
             class Demo extends React.Component {
+                mRef = React.createRef();
                 state = { isHot: true };
-                showInfo = () => {};
-                getRef = (currentNode) => {
-                    this.input1 = currentNode;
-                    console.log("@", currentNode);
+                showInfo = () => {
+                    console.log(this.mRef.current)
                 };
+                
 
                 render() {
                     const { isHot } = this.state;
@@ -33,13 +33,7 @@
                             <h2>今天{isHot ? "炎热" : "凉快"}</h2>
                             {/*{当已内联函数定义时，在更新时会触发两次，第一次为null，第二次为值*/}
                             <input
-                                ref={this.getRef}
-                                type="text"
-                                placeholder="点击按钮提示数据"
-                            />
-                            {/*以后这样写
-                            <input
-                                ref={(c)=>{this.input1 = c;}}/>*/}
+                                ref={this.mRef}/>
                             &nbsp;
                             <button onClick={this.showInfo}>
                                 点击我提示左侧的数据
